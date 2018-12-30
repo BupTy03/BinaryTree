@@ -1,6 +1,6 @@
 #pragma once
-#ifndef BINARYNODE_HPP
-#define BINARYNODE_HPP
+#ifndef BINARYNODE_H
+#define BINARYNODE_H
 
 #include<memory>
 #include<queue>
@@ -133,4 +133,4 @@ namespace my
 	};
 }
 
-#endif // !BINARYNODE_HPP
+#endif // !BINARYNODE_H
