@@ -13,6 +13,26 @@ int main()
 	system("chcp 1251");
 	system("cls");
 
+	BinaryNode<int> root(5);
+	root.addNode(2);
+	root.addNode(6);
+	root.addNode(1);
+	root.addNode(4);
+	root.addNode(9);
+	root.addNode(3);
+	root.addNode(7);
+	root.addNode(10);
+	root.addNode(8);
+
+	TraverseDepthFirst(&root, [](int i) { cout << i << " "; });
+	cout << endl;
+
+	root.deleteNode(9);
+
+	TraverseDepthFirst(&root, [](int i) { cout << i << " "; });
+	cout << endl;
+
+#if 0
 	linear_congruential_engine<unsigned int, 1, 1, 10> rand_engine(((chrono::high_resolution_clock::now()).time_since_epoch()).count());
 	int tmp = rand_engine();
 	cout << "[ " << tmp << " ";
@@ -46,6 +66,7 @@ int main()
 		cout << "Node is not found :(" << endl;
 	else
 		cout << "Node is found: " << node->data() << endl;
+#endif
 
 	system("pause");
 	return 0;
