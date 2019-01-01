@@ -120,6 +120,7 @@
   <ItemGroup>
     <ClInclude Include="BinaryNode.h" />
     <ClInclude Include="range.hpp" />
+    <ClInclude Include="TestObject.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

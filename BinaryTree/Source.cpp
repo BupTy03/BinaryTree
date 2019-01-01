@@ -4,6 +4,7 @@
 #include <chrono>
 #include "BinaryNode.h"
 #include "range.hpp"
+#include "TestObject.hpp"
 
 using namespace std;
 using namespace my;
@@ -13,23 +14,14 @@ int main()
 	system("chcp 1251");
 	system("cls");
 
-	BinaryNode<int> root(5);
-	root.addNode(2);
-	root.addNode(6);
-	root.addNode(1);
-	root.addNode(4);
-	root.addNode(9);
-	root.addNode(3);
-	root.addNode(7);
-	root.addNode(10);
-	root.addNode(8);
+	BinaryNode<TestObject> root;
 
-	TraverseDepthFirst(&root, [](int i) { cout << i << " "; });
+	TraverseDepthFirst(&root, [](const TestObject& i) { cout << i << " "; });
 	cout << endl;
 
-	root.deleteNode(9);
+	root.deleteNode(root.data());
 
-	TraverseDepthFirst(&root, [](int i) { cout << i << " "; });
+	TraverseDepthFirst(&root, [](const TestObject& i) { cout << i << " "; });
 	cout << endl;
 
 #if 0

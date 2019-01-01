@@ -120,11 +120,16 @@ namespace my
 			BinaryNode* node = findNode(data);
 			if (node == nullptr) return;
 
+			bool is_root = (node->parent_ == nullptr);
+
 			// first situation
 			if (node->left_ == nullptr && node->right_ == nullptr)
 			{
 				setup_new_node(node, nullptr);
-				deallocateNode(node);
+
+				if (!is_root)
+					deallocateNode(node);
+
 				return;
 			}
 
@@ -152,7 +157,9 @@ namespace my
 					tmp->right_ = node->right_;
 				}
 
-				deallocateNode(node);
+				if (!is_root)
+					deallocateNode(node);
+
 				return;
 			}
 
@@ -162,7 +169,8 @@ namespace my
 			else
 				setup_new_node(node, node->right_);
 
-			deallocateNode(node);
+			if (!is_root)
+				deallocateNode(node);
 		}
 
 		template<typename F, typename... Args>
@@ -218,7 +226,16 @@ namespace my
 			assert(old_node != nullptr);
 
 			if (old_node->parent_ == nullptr)
-				throw std::runtime_error{ "it's impossible to delete a root!" };
+			{
+				if (new_node == nullptr)
+				{
+					old_node->data_ = T{};
+					return;
+				}
+				old_node->data_ = std::move(new_node->data_);
+				deallocateNode(new_node);
+				return;
+			}
 
 			if (old_node->parent_->left_ == old_node)
 				old_node->parent_->left_ = new_node;
@@ -231,6 +248,7 @@ namespace my
 		}
 		void deallocateNode(BinaryNode* node)
 		{
+			assert(node != nullptr);
 			node->left_ = nullptr;
 			node->right_ = nullptr;
 			alloc_.destroy(node);
@@ -240,6 +258,7 @@ namespace my
 		BinaryNode* parent_{};
 		BinaryNode* left_{};
 		BinaryNode* right_{};
+
 		allocator_type alloc_;
 		T data_;
 	};
